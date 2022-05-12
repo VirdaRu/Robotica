@@ -7,6 +7,10 @@ frame = cv2.imread("images\Baan_top_view.jpg")
 # resize img for better viewing, not needed in final product
 frame = cv2.resize(frame, (783, 480))
 
+height = frame.shape[0]
+width = frame.shape[1]
+
+
 # turn image to greyscale
 grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -46,6 +50,10 @@ for cnt in cnts:
 
 # draw a line through the centroids (should be a fitted line, currently it draws from 1st to last)
 cv2.line(frame, line[0], line[-1], (0, 0, 255), thickness=3)
+# draw midline of camera for reference
+cv2.line(frame, (int(width/2), height),
+         (int(width/2), 0), (0, 255, 0), thickness=2)
+
 
 cv2.imshow('bitwise', invert)
 cv2.imshow('Black_line', frame)
