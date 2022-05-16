@@ -24,6 +24,7 @@
 
   .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   /* background-position: center bottom; */
   }
   
   .container {
@@ -40,7 +41,29 @@
     color: grey;
   }
 
+  header {
+  /*background-color: skyblue;*/
+  background-image: url(GroupImages/Groupfotoresized.jpg);
+  background-size: cover;
+  background-position: center top;
+  padding: 5em 0 4em 0;
+  text-align: center;
+}
+
+
 </style>
+
+<script>
+  function toggle(id) {
+      "use strict";
+      var e = document.getElementById("hoofdmenu");
+      if (e.style.display === "block") {
+          e.style.display = "none";
+      } else {
+          e.style.display = "block";
+      }
+  }
+</script>
 <body>
     <nav>
         <p class="menuknop"><a href="#" onclick="toggle('hoofdmenu');">Menu</a></p>
@@ -63,7 +86,7 @@
     <div class="row">
       <div class="column">
         <div class="card">
-          <img src="GroupImages/Timo.jpg" alt="Timo" style="width:100%">
+          <img src="GroupImages/TimoResized.jpg" alt="Timo" style="width:100%">
           <div class="container">
             <h2>Timo van der Griend</h2>
             <p class="title">Project Leider</p>
@@ -76,7 +99,7 @@
     
       <div class="column">
         <div class="card">
-          <img src="GroupImages/Rick.jpg" alt="Rick" style="width:100%">
+          <img src="GroupImages/RickResized.jpg" alt="Rick" style="width:100%">
           <div class="container">
             <h2>Rick Wijbenga</h2>
             <p class="title">Art Director</p>
@@ -89,7 +112,7 @@
       
       <div class="column">
         <div class="card">
-          <img src="GroupImages/Aldert.jpg" alt="Aldert" style="width:100%">
+          <img src="GroupImages/AldertResized.jpg" alt="Aldert" style="width:100%">
           <div class="container">
             <h2>Aldert</h2>
             <p class="title">Designer</p>
