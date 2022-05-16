@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>Robotica Groep 10</title>
+  <link rel="stylesheet" href="Style.css">
+  <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">-->
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+  <meta name="viewport" content="initial-scale=1.0, width=device-width">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+  <script>
+    function toggle(id) {
+      "use strict";
+      var e = document.getElementById("hoofdmenu");
+      if (e.style.display === "block") {
+        e.style.display = "none";
+      } else {
+        e.style.display = "block";
+      }
+    }
+  </script>
 </head>
+
+
 <style>
-  html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after {
+  *,
+  *:before,
+  *:after {
     box-sizing: inherit;
   }
-  
+
   .column {
     float: left;
     width: 33.3%;
@@ -24,101 +43,115 @@
 
   .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-   /* background-position: center bottom; */
+    /* background-position: center bottom; */
   }
-  
+
   .container {
     padding: 0 16px;
   }
-  
-  .container::after, .row::after {
+
+  .container::after,
+  .row::after {
     content: "";
     clear: both;
     display: table;
   }
-  
+
   .title {
     color: grey;
   }
 
   header {
-  /*background-color: skyblue;*/
-  background-image: url(GroupImages/Groupfotoresized.jpg);
-  background-size: cover;
-  background-position: center top;
-  padding: 5em 0 4em 0;
-  text-align: center;
-}
-
-
+    /*background-color: skyblue;*/
+    background-image: url(GroupImages/Groupfotoresized.jpg);
+    background-size: cover;
+    background-position: center top;
+    padding: 5em 0 4em 0;
+    text-align: center;
+  }
 </style>
 
 <script>
   function toggle(id) {
-      "use strict";
-      var e = document.getElementById("hoofdmenu");
-      if (e.style.display === "block") {
-          e.style.display = "none";
-      } else {
-          e.style.display = "block";
-      }
+    "use strict";
+    var e = document.getElementById("hoofdmenu");
+    if (e.style.display === "block") {
+      e.style.display = "none";
+    } else {
+      e.style.display = "block";
+    }
   }
 </script>
+
 <body>
-    <nav>
-        <p class="menuknop"><a href="#" onclick="toggle('hoofdmenu');">Menu</a></p>
-        <ul id="hoofdmenu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="voorstellen.html">Wie zijn wij?</a></li>
-            <li><a href="ComingSoon.html" target="blank">Foto's</a></li>
-        </ul>
-    </nav>
-    <br>
+  <nav>
+    <p class="menuknop"><a href="#" onclick="toggle('hoofdmenu');">Menu</a></p>
+    <ul id="hoofdmenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="voorstellen.html">Wie zijn wij?</a></li>
+      <li><a href="ComingSoon.html" target="blank">Foto's</a></li>
+    </ul>
+  </nav>
+  <br>
 
-    <header>
+  <header>
 
-        <h1><a href="index.html">Wie zijn wij?</a></h1>
-    </header>
-    <br>
-    <h2 class="subheader">Deze robot kan niet gemaakt zijn zonder een team aan toppers! <br> We stellen ons voor:
-    </h2>
+    <h1><a href="index.html">Wie zijn wij?</a></h1>
+  </header>
+  <br>
+  <h2 class="subheader">Deze robot kan niet gemaakt zijn zonder een team aan toppers! <br> We stellen ons voor:
+  </h2>
+
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img src="GroupImages/TimoResized.jpg" alt="Timo" style="width:100%">
+        <div class="container">
+          <h2>Timo van de Griend</h2>
+          <p class="title">Project & ET-Leider</p>
+          <p>Some text that describes me lorem </p>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <img src="GroupImages/RickResized.jpg" alt="Rick" style="width:100%">
+        <div class="container">
+          <h2>Rick Wijbenga</h2>
+          <p class="title">ICT-Leider</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <img src="GroupImages/AldertResized.jpg" alt="Aldert" style="width:100%">
+        <div class="container">
+          <h2>Aldert Elzinga</h2>
+          <p class="title">WTB-Leider</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+
+
+        </div>
+      </div>
+    </div>
 
     <div class="row">
       <div class="column">
         <div class="card">
-          <img src="GroupImages/TimoResized.jpg" alt="Timo" style="width:100%">
+          <img src="GroupImages/MarnickResized.jpg" alt="Timo" style="width:100%">
           <div class="container">
-            <h2>Timo van de Griend</h2>
-            <p class="title">Project Leider/ ET-Leider</p>
+            <h2>Marnick Bijlsma</h2>
+            <p class="title">Lorem, ipsum dolor.</p>
             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>example@example.com</p>
-            
-          </div>
-        </div>
-      </div>
-    
-      <div class="column">
-        <div class="card">
-          <img src="GroupImages/RickResized.jpg" alt="Rick" style="width:100%">
-          <div class="container">
-            <h2>Rick Wijbenga</h2>
-            <p class="title">ICT-Leider</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>example@example.com</p>
-           
-          </div>
-        </div>
-      </div>
-      
-      <div class="column">
-        <div class="card">
-          <img src="GroupImages/AldertResized.jpg" alt="Aldert" style="width:100%">
-          <div class="container">
-            <h2>Aldert Elzinga</h2>
-            <p class="title">WTB-Leider</p>
-            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-            <p>example@example.com</p>
-       
+
+
           </div>
         </div>
       </div>
@@ -126,30 +159,16 @@
       <div class="row">
         <div class="column">
           <div class="card">
-            <img src="GroupImages/MarnickResized.jpg" alt="Timo" style="width:100%">
+            <img src="GroupImages/LarsResized.jpg" alt="Timo" style="width:100%">
             <div class="container">
-              <h2>Marnick Bijlsma</h2>
+              <h2>Lars Kingma</h2>
               <p class="title">Lorem, ipsum dolor.</p>
               <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-              <p>example@example.com</p>
-              
+
+
             </div>
           </div>
         </div>
-
-        <div class="row">
-          <div class="column">
-            <div class="card">
-              <img src="GroupImages/LarsResized.jpg" alt="Timo" style="width:100%">
-              <div class="container">
-                <h2>Lars Kingma</h2>
-                <p class="title">Lorem, ipsum dolor.</p>
-                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>example@example.com</p>
-                
-              </div>
-            </div>
-          </div>
 
         <div class="row">
           <div class="column">
@@ -159,8 +178,8 @@
                 <h2>Niels Oudman</h2>
                 <p class="title">Lorem, ipsum dolor.</p>
                 <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>example@example.com</p>
-                
+
+
               </div>
             </div>
           </div>
@@ -173,8 +192,8 @@
                   <h2>Bryan Sok</h2>
                   <p class="title">Lorem, ipsum dolor.</p>
                   <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                  <p>example@example.com</p>
-                  
+
+
                 </div>
               </div>
             </div>
@@ -187,8 +206,8 @@
                     <h2>Kevin Voet</h2>
                     <p class="title">Lorem, ipsum dolor.</p>
                     <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                    <p>example@example.com</p>
-                    
+
+
                   </div>
                 </div>
               </div>
@@ -201,8 +220,8 @@
                       <h2>Benjamin de Bruijn</h2>
                       <p class="title">Lorem, ipsum dolor.</p>
                       <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                      <p>example@example.com</p>
-                      
+
+
                     </div>
                   </div>
                 </div>
@@ -215,8 +234,8 @@
                         <h2>Rowan Planting</h2>
                         <p class="title">Lorem, ipsum dolor.</p>
                         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                        <p>example@example.com</p>
-                        
+
+
                       </div>
                     </div>
                   </div>
@@ -229,8 +248,8 @@
                           <h2>Marten Scheffer</h2>
                           <p class="title">Lorem, ipsum dolor.</p>
                           <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                          <p>example@example.com</p>
-                          
+
+
                         </div>
                       </div>
                     </div>
@@ -238,8 +257,13 @@
 
 
 
-    </div>
-    
-    </body>
-    </html>
-    
+                  </div>
+                  <footer>
+                    <p>© 2022 WebsiteRobotica Groep 10</p>
+                    <p><a href="#">algemene voorwaarden</a></p>
+                    <p><a href="#">links</a></p>
+                  </footer>
+
+</body>
+
+</html>
