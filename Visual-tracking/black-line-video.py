@@ -3,7 +3,7 @@ import imutils
 import cv2
 import time
 
-cap = cv2.VideoCapture("videos/black-line-video.mp4")
+cap = cv2.VideoCapture("Visual-tracking/videos/black-line-video.mp4")
 
 while(cap.isOpened()):
     ret, frame = cap.read()

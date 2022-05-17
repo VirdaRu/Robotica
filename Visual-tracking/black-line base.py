@@ -6,7 +6,7 @@ import time
 
 # base version of black line tracking, just to have it easily accesable
 
-cap = cv2.VideoCapture("videos/black-line-video.mp4")
+cap = cv2.VideoCapture("Visual-tracking/videos/black-line-video.mp4")
 
 while(cap.isOpened()):
     ret, frame = cap.read()
