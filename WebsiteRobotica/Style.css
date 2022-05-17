@@ -3,6 +3,8 @@
   height: auto;
 }
 
+
+
 .subheader {
   text-align: center;
   color: #8a897c;
@@ -294,5 +296,14 @@ img.links {
   'wght' 400,
   'GRAD' 0,
   'opsz' 48
+}
+
+/*Responsive container voor telemetry data*/
+.container69 {  
+  display: grid;  
+  grid-template-columns: 1fr 1fr 1fr;  
+  grid-template-rows: 50px 50px;  
+  border: 12px solid #2b4162;
+border-radius: 10px;
 }
 
