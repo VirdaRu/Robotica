@@ -285,3 +285,14 @@ img.links {
     margin: 0 auto;
   }
 }
+
+/*Style voor Google logo's*/
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
