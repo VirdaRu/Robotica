@@ -224,7 +224,7 @@ img.links {
   }
 
   nav ul li.submenu:hover ul {
-    background-color: rgba(33, 129, 148, 0.95);
+    background-color: #218194f2;
     width: 8em;
     left: 0;
     top: 100%;
