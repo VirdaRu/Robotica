@@ -11,22 +11,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="icon" href="Images/logo.jpg">
 
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script>
+        function toggle(id) {
+            "use strict";
+            var e = document.getElementById("hoofdmenu");
+            if (e.style.display === "block") {
+                e.style.display = "none";
+            } else {
+                e.style.display = "block";
+            }
+        }
+    </script>
+
+
 
 </head>
+
+<nav>
+  <p class="menuknop"><a href="#" onclick="toggle('hoofdmenu');">Menu</a></p>
+  <ul id="hoofdmenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Voorstellen.html">Wie zijn wij?</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+      <li><a href="Telemetrie.html">Telemetrie</a></li>
+      <li><a href="ComingSoon.html" target="blank">Foto's</a></li>
+  </ul>
+</nav>
+<br>
 <body>
 
 <div class="header">
-  <h2>Blog Name</h2>
+  <h2>Robert's leven</h2>
 </div>
 
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2017</h5>
-      <img src="Blog" alt="Avatar" style="width:100%">
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      <h2>Week 3</h2>
+      <h5>Geschreven op: 13 Mei 2022 </h5>
+      <img src="BlogImages/Rick.png" alt="Rick" style="width:75%">
+      <video controls>
+        <source src="BlogImages/zwartelijntrackerresized.mp4" type="video/mp4" style="width:25%">
+      </video>
+      
+      <p><strong>Het begin van Robert</strong></p>
+      <p>De eerste dingen voor Robert worden gemaakt, de eerste schetsen voor Robert zijn er, de controller word gebouwd en er zijn stukken software geschreven. Zo kan Robert al een blauw blokje herkennen en de zwarte lijn op het parkour. Ook is er een website gemaakt om iedereen op de hoogte te houden van de voortgang van Robert.</p>
+  
+      
     </div>
     <div class="card">
       <h2>TITLE HEADING</h2>
