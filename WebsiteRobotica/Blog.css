@@ -1,12 +1,27 @@
+
 * {
     box-sizing: border-box;
   }
-  
+
+  .responsive {
+  width: 100%;
+  height: auto;
+}
   /* Add a gray background color with some padding */
   body {
     font-family: Arial;
     padding: 20px;
     background: #f1f1f1;
+  }
+
+  .rspnsv {
+    width: 50%;
+    height: auto;
+  }
+
+  video {
+    width: 50%;
+    height: auto;
   }
   
   /* Header/Blog Title */
@@ -30,6 +45,8 @@
     width: 25%;
     padding-left: 20px;
   }
+
+
   
   /* Fake image */
   .fakeimg {
@@ -37,6 +54,14 @@
     width: 100%;
     padding: 20px;
   }
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+}
+
+
   
   /* Add a card effect for articles */
   .card {
