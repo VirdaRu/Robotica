@@ -30,9 +30,12 @@ while(1):
     mask = cv2.erode(mask, None, iterations=2)
     mask = cv2.dilate(mask, None, iterations=2)
     # get the contours of the image
-    cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
-                            cv2.CHAIN_APPROX_SIMPLE)
-    cnts = imutils.grab_contours(cnts)
+    # cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
+    #                         cv2.CHAIN_APPROX_SIMPLE)
+    # cnts = imutils.grab_contours(cnts)
+
+    cnts, _ = cv2.findContours(
+        mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
     # go through all the contours
     for cnt in cnts:

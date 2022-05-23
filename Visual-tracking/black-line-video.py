@@ -37,9 +37,12 @@ while(cap.isOpened()):
     invert = cv2.bitwise_not(thres)
 
     # find contours
-    cnts = cv2.findContours(invert, cv2.RETR_EXTERNAL,
-                            cv2.CHAIN_APPROX_SIMPLE)
-    cnts = imutils.grab_contours(cnts)
+    # cnts = cv2.findContours(invert, cv2.RETR_EXTERNAL,
+    #                         cv2.CHAIN_APPROX_SIMPLE)
+    # cnts = imutils.grab_contours(cnts)
+
+    cnts, _ = cv2.findContours(
+        invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
     # array to save centroids of the black contours
     line = []
@@ -101,12 +104,12 @@ while(cap.isOpened()):
     # draw a line through the centroids (should be a fitted line, currently it draws from 1st to last)
     cv2.line(frame, line[0], line[-1], (0, 0, 255), thickness=3)
 
-    cv2.imshow('bitwise', invert)
+    # cv2.imshow('bitwise', invert)
     cv2.imshow('frame', frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-    time.sleep(0.01)
+    time.sleep(0.02)
 
 print("end")
