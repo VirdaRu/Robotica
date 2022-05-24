@@ -7,5 +7,5 @@ song = 'Music (mp3)/S10 - De Diepte - Netherlands 🇳🇱 - Official Music Vide
 
 playSong = vlc.MediaPlayer(song)
 playSong.play()
-time.sleep(10)
+time.sleep(500)
 playSong.stop()
