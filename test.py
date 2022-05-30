@@ -1,4 +1,5 @@
 from tkinter import *
+from tracemalloc import stop
 from turtle import width
 from numpy import tile
 import pygame
@@ -29,6 +30,11 @@ def play():
     pygame.mixer.music.load(song)
     pygame.mixer.music.play(loops=0)
 
+# Stop PLaying Current Song
+def stop():
+    pygame.mixer.music.stop()
+    song_box.select_clear(ACTIVE)
+
 # Create PLaylist Box
 song_box = Listbox(root, bg="black", fg="green", width=60, selectbackground="gray", selectforeground="black")
 song_box.pack(pady=20)
@@ -45,16 +51,10 @@ controls_frame = Frame(root)
 controls_frame.pack()
 
 # Create Player Control Buttons
-back_btn = Button(controls_frame, image=back_btn_img, borderwidth=0)
-forward_btn = Button(controls_frame, image=forward_btn_img, borderwidth=0)
 play_btn = Button(controls_frame, image=play_btn_img, borderwidth=0, command=play)
-pause_btn = Button(controls_frame, image=pause_btn_img, borderwidth=0)
-stop_btn = Button(controls_frame, image=stop_btn_img, borderwidth=0)
+stop_btn = Button(controls_frame, image=stop_btn_img, borderwidth=0, command=stop)
 
-back_btn.grid(row=0, column=0, padx=10)
-forward_btn.grid(row=0, column=1, padx=10)
 play_btn.grid(row=0, column=2, padx=10)
-pause_btn.grid(row=0, column=3, padx=10)
 stop_btn.grid(row=0, column=4, padx=10)
 
 # Create Menu
