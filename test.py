@@ -1,11 +1,13 @@
-#plays the song for 10 seconds
+from google.colab import drive
 
-import vlc
-import time
+drive.mount('/GD')
 
-song = 'Music (mp3)/S10 - De Diepte - Netherlands 🇳🇱 - Official Music Video - Eurovision 2022.mp3'
+import IPython.display as ipd
 
-playSong = vlc.MediaPlayer(song)
-playSong.play()
-time.sleep(500)
-playSong.stop()
+import librosa
+
+import librosa.display
+
+import matplotlib.pyplot as plt
+
+ipd.Audio('/GD/.../audio/numb.m4a')
