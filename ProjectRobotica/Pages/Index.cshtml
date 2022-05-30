@@ -3,41 +3,29 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<h2 class="subheader">
-    Hier kun je live zien wat robert aan het doen is!
-</h2>
-<hr>
 <article>
-    <img src="Images/logo.jpg" alt="twee taxis" class="links" style="width: 350px;">
+    <img src="Images/logo.jpg" alt="Logo" class="links" style="width: 350px;">
 
     <h2>Wat doet Robert:</h2>
 
     <p>
-        Op deze pagina gaan we live tracken wat Robert aan het doen is. Zo kun je zien hoe snel Robert op het moment rijd,
-        hoeveel torque hij heeft en hoe dicht hij op de muur zit.
+        Op deze pagina gaan we live tracken wat Robert aan het doen is. Zo kun je hier zien hoeveel het object weegt wat Robert op de weegschaal heeft liggen.
     </p>
 
 
-
-
-
     <div class="container69">
-        <div><strong>Current Speed:</strong><br> 69kph</div>
-        <div><strong>Current Torque:</strong> <bR> 420rpm</div>
-        <div><strong>Current Wall distance:</strong> <br> 69cm</div>
+        <div><strong>Current Weight:</strong><br> <span asp-for="weight">@Model.weight</span> </div>
+        <div><strong>Current Something:</strong> <bR> <span asp-for="rpm">@Model.RPM</span></div>
     </div>
-
+    <form asp-page-handler="server" method="post">
+        <button class="btn btn-default">haal data op</button>
+    </form>
+    <form asp-page-handler="reset" method="post">
+        <button class="btn btn-default">Reset</button>
+    </form>
 </article>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-
-<div class="text-center">
+<!--<div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Hier kan je de live telemetrie zien van Robert de Robot.</p>
     <span asp-for="weight">@Model.weight</span>
@@ -49,4 +37,4 @@
     <form asp-page-handler="reset" method="post">
         <button class="btn btn-default">Reset</button>
     </form>
-</div>
+</div>-->
