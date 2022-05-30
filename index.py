@@ -1,5 +1,3 @@
-#plays the song for 10 seconds
-
 import vlc
 import time
 
