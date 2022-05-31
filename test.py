@@ -16,7 +16,7 @@ def add_song():
     song = filedialog.askopenfilename(initialdir='Music (mp3)/', title="Choose A Song", filetypes=(("mp3 Files", "*.mp3"), ))
     
     # Delete Directory & Extension
-    song = song.replace("C:/Users/bryan/source/repos/Robotica/Music (mp3)", "")
+    song = song.replace("C:/Users/bryan/source/repos/Robotica/Music/mp3", "")
     song = song.replace(".mp3", "")
     
     # Add Song To Listbox
@@ -25,7 +25,7 @@ def add_song():
 # Play Selected Song
 def play():
     song = song_box.get(ACTIVE)
-    song = f'C:/Users/bryan/source/repos/Robotica/Music (mp3)/{song}.mp3'
+    song = f'C:/Users/bryan/source/repos/Robotica/Music/mp3/{song}.mp3'
     
     pygame.mixer.music.load(song)
     pygame.mixer.music.play(loops=0)
