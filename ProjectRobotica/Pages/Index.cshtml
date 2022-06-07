@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Home page";
 }
-@*<article>
+<article>
     <img src="Images/logo.jpg" alt="Logo" class="links" style="width: 350px;">
 
     <h2>Wat doet Robert:</h2>
@@ -23,18 +23,18 @@
     <form asp-page-handler="reset" method="post">
         <button class="btn btn-default">Reset</button>
     </form>
-</article>*@
+</article>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Hier kan je de live telemetrie zien van Robert de Robot.</p>
-    <span asp-for="weight">@Model.weight</span>
-    <br>
-    <span asp-for="rpm">@Model.RPM</span>
-    <form asp-page-handler="server" method="post">
-        <button class="btn btn-default">haal data op</button>
-    </form>
-    <form asp-page-handler="reset" method="post">
-        <button class="btn btn-default">Reset</button>
-    </form>
-</div>
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Hier kan je de live telemetrie zien van Robert de Robot.</p>
+        <span asp-for="weight">@Model.weight</span>
+        <br>
+        <span asp-for="rpm">@Model.RPM</span>
+        <form asp-page-handler="server" method="post">
+            <button class="btn btn-default">haal data op</button>
+        </form>
+        <form asp-page-handler="reset" method="post">
+            <button class="btn btn-default">Reset</button>
+        </form>
+    </div>*@
