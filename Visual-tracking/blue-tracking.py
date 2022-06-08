@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import imutils
+
 
 # capture video from source 0
 cap = cv2.VideoCapture(0)
@@ -45,6 +45,12 @@ while(1):
         if (area > 4000) & (area < 20000):
             # draw contours
             cv2.drawContours(frame, [cnt], 0, (0, 255, 255), 3)
+          
+            c = max(cnts, key = cv2.contourArea)
+            x,y,w,h = cv2.boundingRect(c) 
+             
+            cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
+            
             # get center of contour
             M = cv2.moments(cnt)
             cx = int(M['m10']/M['m00'])
@@ -62,15 +68,17 @@ while(1):
     # show the binary image and the camera frame
     cv2.imshow('Binary', mask)
     cv2.imshow('Frame', frame)
+    cv2.imshow("Result", np.hstack([frame, frame]))
+    
 
     # exit windows with esc
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
-        break
+     break
 
-def preprocessing():
+    def preprocessing():
     #doe pre preprocessing
-    pass
+        pass
 
 # Destroys all of the windows.
 cv2.destroyAllWindows()
