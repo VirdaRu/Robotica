@@ -3,7 +3,7 @@ import numpy as np
 import imutils
 
 # read image, will be video/videocapture
-frame = cv2.imread("Visual-tracking/images\Baan_top_view.jpg")
+frame = cv2.imread("Visual-tracking/images\Baan_front_view.jpg")
 # resize img for better viewing, not needed in final product
 frame = cv2.resize(frame, (783, 480))
 

@@ -36,11 +36,6 @@ while(cap.isOpened()):
     # invert image again (pretty sure these inverts arent needed, but it works for now)
     invert = cv2.bitwise_not(thres)
 
-    # find contours
-    # cnts = cv2.findContours(invert, cv2.RETR_EXTERNAL,
-    #                         cv2.CHAIN_APPROX_SIMPLE)
-    # cnts = imutils.grab_contours(cnts)
-
     cnts, _ = cv2.findContours(
         invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
@@ -77,10 +72,8 @@ while(cap.isOpened()):
     # invert image again (pretty sure these inverts arent needed, but it works for now)
     invert = cv2.bitwise_not(thres)
 
-    # find contours
-    cnts = cv2.findContours(invert, cv2.RETR_EXTERNAL,
-                            cv2.CHAIN_APPROX_SIMPLE)
-    cnts = imutils.grab_contours(cnts)
+    cnts, _ = cv2.findContours(
+        invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
     # array to save centroids of the black contours
     line = []

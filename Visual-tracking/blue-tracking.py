@@ -68,6 +68,10 @@ while(1):
     if k == 27:
         break
 
+def preprocessing():
+    #doe pre preprocessing
+    pass
+
 # Destroys all of the windows.
 cv2.destroyAllWindows()
 
