@@ -33,6 +33,7 @@ const int echoPin = 10;
 // defines variables
 long duration;
 int distance;
+int MicVolume = 0;
 
 
 void setup() {
@@ -81,6 +82,9 @@ void loop() {
     Serial.print(scale.get_units(), 4); //scale.get_units() returns a float
     Serial.print(" kg"); //You can change this to kg but you'll need to refactor the calibration_factor
     Serial.println();
+     MicVolume = (analogRead(0));
+   Serial.println(MicVolume);
+   delay(5);
   }
   
   delay(2000);
