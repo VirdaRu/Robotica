@@ -21,7 +21,7 @@ while(1):
     # Converts images from BGR to HSV
     hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
     # lower and upper bounds for masking blue (might need tweaking to make more accurate)
-    lower_blue = np.array([100, 50, 50])
+    lower_blue = np.array([100, 100, 100]) # if is does not work reset s and v value back to 50
     upper_blue = np.array([120, 255, 255])
 
     # only get colors inbetween the upper and lower
