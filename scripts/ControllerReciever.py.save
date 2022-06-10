@@ -1,0 +1,39 @@
+import serial
+import time
+
+#Constants
+JS1 = []
+JS2 = []
+
+BSW = []
+LSW = []
+
+sub = "JS1"
+
+
+Controller =  serial.Serial("/dev/rfcomm0", 38400, timeout=1)
+
+while True:
+	myResult = Controller.readline().decode('utf-8').rstrip()
+#	print(myResult)
+	if sub in myResult:
+		JS1 = myResult.split(":")
+		JS1.pop(0)
+		print(JS1)
+		if int(JS1[1]) > 30:
+        # st	uur forwards
+        print("forward")
+        pass
+    elif int(JS1[1]) < -30:
+        # stuur reverse
+        print("reverse")
+        pass
+
+    if int(JS1[0]) > 30:
+        # stuur forwards
+        print("right")
+        pass
+    elif int(JS1[0]) < -30:
+        # stuur reverse
+        print("left")
+        pass
