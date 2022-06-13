@@ -22,9 +22,11 @@ PORT = 11000
 WeightSensor = "null"
 sub = "JS1"
 BSWstr = "BSW"
+LSWstr = "LSW"
 
 JS1 = []
 BSW = []
+LSW = []
 
 Controller = serial.Serial("/dev/rfcomm0", 38400, timeout=1)
 Deadzone = 130
@@ -82,6 +84,15 @@ if __name__ == '__main__':
                                if BSW[i] == "0":
                                     print("BSW{}".format(i))
                                     arduino.write("BSW{}".format(i).encode())
+                                    
+                   if LSWstr in ControllerInput:
+                          LSW = ControllerInput.split(":")
+                          LSW.pop(0)
+                          for i in range(4):
+                               print(LSW[i])
+                               if LSW[i] == "0":
+                                    print("LSW{}".format(i))
+                                    arduino.write("LSW{}".format(i).encode())
 
             except KeyboardInterrupt:
                 print("KeyboardInterrupt has been caught.")
