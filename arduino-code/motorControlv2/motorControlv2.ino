@@ -60,8 +60,8 @@ void loop() {
   Serial.print(msg);
   if(msg=="stop"){
     stopMotors();
-    Serial.print("stop");
-  }else if(msg.indexOf("forward") != -1){
+    Serial.print("op");
+  }else if(msg == "forward"){
     getSpeed(msg);
     goForward();
     Serial.print("forward");
