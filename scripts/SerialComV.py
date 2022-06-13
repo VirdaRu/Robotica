@@ -81,6 +81,7 @@ if __name__ == '__main__':
                                #If button is pressed (0)
                                if BSW[i] == "0":
                                     print("BSW{}".format(i))
+                                    arduino.write("BSW{}".format(i).encode())
 
             except KeyboardInterrupt:
                 print("KeyboardInterrupt has been caught.")
