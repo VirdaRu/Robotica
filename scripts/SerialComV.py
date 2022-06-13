@@ -20,11 +20,13 @@ HOST = "25.66.57.255"
 PORT = 11000
 
 WeightSensor = "null"
-sub = "JS1"
+JS1str = "JS1"
+JS2str = "JS2"
 BSWstr = "BSW"
 LSWstr = "LSW"
 
 JS1 = []
+JS2 = []
 BSW = []
 LSW = []
 
@@ -53,7 +55,7 @@ if __name__ == '__main__':
                 while True:
                     ControllerInput = Controller.readline().decode('utf-8').rstrip()
                     print(ControllerInput)
-                    if sub in ControllerInput:
+                    if JS1str in ControllerInput:
                           JS1 = ControllerInput.split(":")
                           JS1.pop(0)
                           if int(JS1[1]) > Deadzone:
@@ -72,6 +74,30 @@ if __name__ == '__main__':
                                 print("Easter Egg lmao")
                           else:
                                 arduino.write("stop".encode())
+                    
+                    if JS2str in ControllerInput:
+                          JS2 = ControllerInput.split(":")
+                          JS2.pop(0)
+                          if int(JS2[1]) > Deadzone:
+                                print("forward rightJS")
+                                #Case there is an issue use a variable
+                              #  mSpeed = GetSpeed(JS1[1])
+                               # arduino.write("forward:{}".format(mSpeed).encode())
+                                arduino.write("forward".encode())
+                          elif int(JS2[1]) < -Deadzone:
+                                print("reverse rightJS")
+                                arduino.write("reverse".encode())
+                          if int(JS2[0]) > Deadzone:
+                                print("right rightJS")
+                                arduino.write("right".encode())
+                          elif int(JS2[0]) < -Deadzone:
+                                print("left rightJS")
+                                arduino.write("left".encode())
+                          if int(JS2[2]) == 0:
+                                print("Right JoyStick Easter Egg!")
+                          else:
+                                arduino.write("stop".encode())
+
 
                     #ButtonHandler
                     if BSWstr in ControllerInput:
