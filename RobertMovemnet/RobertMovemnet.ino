@@ -1,5 +1,5 @@
 #include <Dynamixel_Serial.h>       // Library needed to control Dynamixal servo
-#include <AX12A.h>
+
 #include "Arduino.h"
 
 #define SERVO_ControlPin (10u)       
@@ -117,8 +117,8 @@ void GoForward()
   digitalWrite(inL2, HIGH);
   analogWrite(enC, Velocity);
 
-  digitalWrite(inL3, HIGH);
-  digitalWrite(inL4, LOW);
+  digitalWrite(inL3, LOW);
+  digitalWrite(inL4, HIGH);
   analogWrite(enD, Velocity);
 }
 
