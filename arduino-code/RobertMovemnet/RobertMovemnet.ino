@@ -1,9 +1,9 @@
 #include <Dynamixel_Serial.h>       // Library needed to control Dynamixal servo
-#include <AX12A.h>
+//#include <AX12A.h>
 #include "Arduino.h"
 
 #define SERVO_ControlPin (10u)       
-#define SERVO_SET_Baudrate (1000000)
+#define SERVO_SET_Baudrate (56700)
 
 //Front Left Leg
 #define SERVO_ID10 (10u)
@@ -32,7 +32,7 @@
 
 //Constants
 const int Velocity = 150;
-const int DelayVal = 200;
+const int DelayVal = 50;
 const int Deadzone = 150;
 const int LegMoveDelay = 2000;
 
@@ -71,31 +71,33 @@ void setup(){
     Serial.begin(SERVO_SET_Baudrate);
 
     
-    pinMode(enA, OUTPUT);
-    pinMode(enB, OUTPUT);
-    pinMode(enC, OUTPUT);
-    pinMode(enD, OUTPUT);
-    pinMode(inR1, OUTPUT);
-    pinMode(inR2, OUTPUT);
-    pinMode(inR3, OUTPUT);
-    pinMode(inR4, OUTPUT); 
-    pinMode(inL1, OUTPUT);
-    pinMode(inL2, OUTPUT);
-    pinMode(inL3, OUTPUT);
-    pinMode(inL4, OUTPUT);
+//    pinMode(enA, OUTPUT);
+//    pinMode(enB, OUTPUT);
+//    pinMode(enC, OUTPUT);
+//    pinMode(enD, OUTPUT);
+//    pinMode(inR1, OUTPUT);
+//    pinMode(inR2, OUTPUT);
+//    pinMode(inR3, OUTPUT);
+//    pinMode(inR4, OUTPUT); 
+//    pinMode(inL1, OUTPUT);
+//    pinMode(inL2, OUTPUT);
+//    pinMode(inL3, OUTPUT);
+//    pinMode(inL4, OUTPUT);
 }
 
 
 void loop(){
-  
-  StandPosition();
-  delay(1000);
-  GoForward();
-   delay(2000);
-   PronePosition();
-   delay(1000);
-   GoForward();
-   delay(5000);
+  goBack();
+  delay(4000);
+  //Scoop();
+  weightStand();
+  //delay(1000);
+  //GoForward();
+//   delay(2000);
+//   PronePosition();
+//   delay(1000);
+//   GoForward();
+//   delay(5000);
   /*
   Dynamixel.servo(SERVO_ID10, CW_Angle10, Velocity);
   delay(DelayVal);
@@ -124,6 +126,16 @@ void loop(){
   */
 }
 
+void goBack(){
+  digitalWrite(inR3, LOW);
+  digitalWrite(inR4, HIGH);
+  analogWrite(enB, Velocity);
+
+  digitalWrite(inL3, LOW);
+  digitalWrite(inL4, HIGH);
+  analogWrite(enC, Velocity);
+}
+
 //Legs go forward using its ID
 void GoForward()
 {
@@ -131,8 +143,8 @@ void GoForward()
   digitalWrite(inR2, LOW);
   analogWrite(enA, Velocity);
 
-  digitalWrite(inR3, LOW);
-  digitalWrite(inR4, HIGH);
+  digitalWrite(inR3, HIGH);
+  digitalWrite(inR4, LOW);
   analogWrite(enB, Velocity);
 
   digitalWrite(inL1, LOW);
@@ -151,17 +163,39 @@ void LegsBackward(int ID)
 
 }
 
-//Robot Stands still in position
-void StandPosition()
-{
+void StandPosition(){
   Dynamixel.servo(SERVO_ID10,818, Velocity);  
+  delay(DelayVal);
+  Dynamixel.servo(SERVO_ID43, 200, Velocity);
+  delay(DelayVal);
+  Dynamixel.servo(SERVO_ID1, 200, Velocity);
+  delay(DelayVal);
+  Dynamixel.servo(SERVO_ID2, 822, Velocity);
+  
+}
+
+void weightStand(){
+  Dynamixel.servo(SERVO_ID10,818, Velocity);  
+  delay(DelayVal);
+  Dynamixel.servo(SERVO_ID43, 200, Velocity); 
+  
+  delay(5000);
+  Dynamixel.servo(SERVO_ID1, 200, Velocity);
+  delay(DelayVal);
+  Dynamixel.servo(SERVO_ID2, 822, Velocity);
+}
+
+//Robot Stands still in position
+void Scoop()
+{
+  Dynamixel.servo(SERVO_ID10,557, Velocity);  
   
   delay(DelayVal);
   Dynamixel.servo(SERVO_ID1, 200, Velocity);
   delay(DelayVal);
   Dynamixel.servo(SERVO_ID2, 822, Velocity);
   delay(DelayVal);
-  Dynamixel.servo(SERVO_ID43, 200, Velocity);   
+  Dynamixel.servo(SERVO_ID43, 469, Velocity);   
 }
 
 //Converts walking/standing robot to a driving one

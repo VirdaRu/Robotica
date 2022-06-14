@@ -35,7 +35,7 @@ int mSpeed = 200;
 HX711 scale;
 
 void setup() {
-  Serial.begin(38400);
+  Serial.begin(56700);
   //Serial.println("HX711 scale demo");
   //scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   //scale.begin(A2, A3);
@@ -61,8 +61,8 @@ void loop() {
   if(msg=="stop"){
     stopMotors();
     Serial.print("op");
-  }else if(msg == "forward"){
-    getSpeed(msg);
+  }else if(msg.indexOf("forward") != -1){
+    //getSpeed(msg);
     goForward();
     Serial.print("forward");
   }else if(msg=="reverse"){
@@ -136,6 +136,7 @@ void right(){
   motorRVrev();
   motorRArev();
   motorLAfor();
+  motorLVfor();
 //  digitalWrite(inR1, HIGH);
 //  digitalWrite(inR2, LOW);
 //  digitalWrite(inR3, LOW);
@@ -171,6 +172,8 @@ void stopMotors(){
   digitalWrite(inR4, LOW);
   digitalWrite(inL1, LOW);
   digitalWrite(inL2, LOW);
+  digitalWrite(inL3, LOW);
+  digitalWrite(inL4, LOW);
 }
 
 void readSerialPort() {
