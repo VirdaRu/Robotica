@@ -119,9 +119,9 @@ void loop() {
   ServoPosition();
   delay(2000);
   goForward();
-  delay(20000);
+  delay(750);
   
-  //StandPosition();
+  StandPosition();
   
 
 //  if (msg == "pole"){
@@ -161,9 +161,9 @@ void PolePosition(){
 //void ScoopPosition(){
 //  //verander zodat hij kan scoopen
 //  posFRLeg = 469;//43
-//  posBRLeg = 559;//2
+//  posBRLeg = 822;//2
 //  posFLLeg = 557;//10
-//  posBLLeg = 461;//1
+//  posBLLeg = 200;//1
 //}
 
 
