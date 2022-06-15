@@ -21,7 +21,7 @@ while(1):
     # Converts images from BGR to HSV
     hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
     # lower and upper bounds for masking blue (might need tweaking to make more accurate)
-    lower_blue = np.array([100, 100, 100]) # if is does not work reset s and v value back to 50
+    lower_blue = np.array([100, 75, 75]) # if is does not work reset s and v value back to 50
     upper_blue = np.array([120, 255, 255])
 
     # only get colors inbetween the upper and lower
@@ -42,7 +42,7 @@ while(1):
         # filter out too small and too big contours by using the area
         area = cv2.contourArea(cnt)
 
-        if (area > 4000) & (area < 20000):
+        if (area > 1000):
             # draw contours
             cv2.drawContours(frame, [cnt], 0, (0, 255, 255), 3)
           
@@ -58,17 +58,21 @@ while(1):
             # draw centroid
             cv2.circle(frame, (cx, cy), 3, (0, 255, 255), 5)
             # determine if centroid is at left or right part of the frame
-            if cx > (width/2):
+            if cx < (width/2 + 100) and cx > (width/2 - 100):
+                print("Stay center")
+            elif cx > (width/2):
                 # turn right
                 print("go right")
             elif cx < (width/2):
                 # turn left
                 print("go left")
+                
+                
 
     # show the binary image and the camera frame
     cv2.imshow('Binary', mask)
     cv2.imshow('Frame', frame)
-    cv2.imshow("Result", np.hstack([frame, frame]))
+    #cv2.imshow("Result", np.hstack([frame, frame]))
     
 
     # exit windows with esc
