@@ -31,17 +31,14 @@ if __name__ == '__main__':
             print("{} connected!".format(arduino.port))
             try:
                 while True:
-                    # start while loop to loop through frames
-
-                    # get new frame at the start of every loop
                     _, frame = cap.read()
-
                     # blur image
                     blur = cv2.GaussianBlur(frame, (11, 11), 0)
                     # Converts images from BGR to HSV
                     hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
                     # lower and upper bounds for masking blue (might need tweaking to make more accurate)
-                    lower_blue = np.array([100, 50, 50])
+                    # if is does not work reset s and v value back to 50
+                    lower_blue = np.array([100, 75, 75])
                     upper_blue = np.array([120, 255, 255])
 
                     # only get colors inbetween the upper and lower
@@ -49,40 +46,45 @@ if __name__ == '__main__':
                     # erode and dilate to remove whitenoise
                     mask = cv2.erode(mask, None, iterations=2)
                     mask = cv2.dilate(mask, None, iterations=2)
-                    # get the contours of the image
-                    # cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
-                    #                         cv2.CHAIN_APPROX_SIMPLE)
-                    # cnts = imutils.grab_contours(cnts)
 
                     cnts, _ = cv2.findContours(
                         mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
+                    area = cv2.contourArea
                     # go through all the contours
-                    for cnt in cnts:
-                        # filter out too small and too big contours by using the area
-                        area = cv2.contourArea(cnt)
 
-                        if (area > 4000) & (area < 20000):
+                    # filter out too small and too big contours by using the area
+                    if len(cnts) > 0:
+
+                        c = max(cnts, key=cv2.contourArea)
+                        x, y, w, h = cv2.boundingRect(c)
+
+                        if cv2.contourArea(c) > 500:
+
                             # draw contours
-                            cv2.drawContours(
-                                frame, [cnt], 0, (0, 255, 255), 3)
+                            cv2.drawContours(frame, c, -1, (0, 255, 255), 3)
+
+                            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
                             # get center of contour
-                            M = cv2.moments(cnt)
+                            M = cv2.moments(c)
                             cx = int(M['m10']/M['m00'])
                             cy = int(M['m01']/M['m00'])
                             # draw centroid
-                            cv2.circle(frame, (cx, cy), 3,
-                                       (0, 255, 255), 5)
+                            cv2.circle(frame, (cx, cy), 3, (0, 255, 255), 5)
                             # determine if centroid is at left or right part of the frame
-                            if cx > (width/2):
-                                arduino.write("right".encode())
+                            if cx < (width/2 + 100) and cx > (width/2 - 100):
+                                arduino.write("stop".encode())
+                                print("Stay center")
+                            elif cx > (width/2):
                                 # turn right
+                                arduino.write("right".encode())
                                 print("go right")
                             elif cx < (width/2):
                                 # turn left
                                 arduino.write("left".encode())
-                                print("go left")
+                                print("go left")     
 
             except KeyboardInterrupt:
-                cap.release()
-                print("KeyboardInterrupt has been caught.")
+                 cap.release()
+                 print("KeyboardInterrupt has been caught.")
