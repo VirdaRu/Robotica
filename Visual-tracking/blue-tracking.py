@@ -21,7 +21,8 @@ while(1):
     # Converts images from BGR to HSV
     hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
     # lower and upper bounds for masking blue (might need tweaking to make more accurate)
-    lower_blue = np.array([100, 75, 75]) # if is does not work reset s and v value back to 50
+    # if is does not work reset s and v value back to 50
+    lower_blue = np.array([100, 75, 75])
     upper_blue = np.array([120, 255, 255])
 
     # only get colors inbetween the upper and lower
@@ -37,22 +38,24 @@ while(1):
     cnts, _ = cv2.findContours(
         mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
+    area = cv2.contourArea
     # go through all the contours
-    for cnt in cnts:
-        # filter out too small and too big contours by using the area
-        area = cv2.contourArea(cnt)
 
-        if (area > 1000):
+    # filter out too small and too big contours by using the area
+    if len(cnts) > 0:
+
+        c = max(cnts, key=cv2.contourArea)
+        x, y, w, h = cv2.boundingRect(c)
+
+        if cv2.contourArea(c) > 500:
+
             # draw contours
-            cv2.drawContours(frame, [cnt], 0, (0, 255, 255), 3)
-          
-            c = max(cnts, key = cv2.contourArea)
-            x,y,w,h = cv2.boundingRect(c) 
-             
-            cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
-            
+            cv2.drawContours(frame, c, -1, (0, 255, 255), 3)
+
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
             # get center of contour
-            M = cv2.moments(cnt)
+            M = cv2.moments(c)
             cx = int(M['m10']/M['m00'])
             cy = int(M['m01']/M['m00'])
             # draw centroid
@@ -66,22 +69,19 @@ while(1):
             elif cx < (width/2):
                 # turn left
                 print("go left")
-                
-                
 
     # show the binary image and the camera frame
     cv2.imshow('Binary', mask)
     cv2.imshow('Frame', frame)
     #cv2.imshow("Result", np.hstack([frame, frame]))
-    
 
     # exit windows with esc
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
-     break
+        break
 
     def preprocessing():
-    #doe pre preprocessing
+        # doe pre preprocessing
         pass
 
 # Destroys all of the windows.
