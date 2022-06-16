@@ -28,11 +28,11 @@
 
 //Bek
 #define SERVO_ID3 (3u)
-#define CW_Angle3 104
+#define CW_Angle3 130
 #define CCW_Angle3 508
 
-#define LOADCELL_DOUT_PIN  A2
-#define LOADCELL_SCK_PIN  A3
+#define LOADCELL_DOUT_PIN  A4
+#define LOADCELL_SCK_PIN  A5
 
 //motor RA/A
 const int enRA = 13;
@@ -49,7 +49,6 @@ const int enLA = 7;
 const int inL1 = 5;
 const int inL2 = 4;
 
-
 //motor LV/D
 const int enLV = 6;
 const int inL3 = 3;
@@ -57,17 +56,19 @@ const int inL4 = 2;
 
 String msg = "";
 
+
 int mSpeed = 150; //motorspeed
 const int Velocity = 150; //servo velocity
 const int DelayVal = 50;
-//const int LegMoveDelay = 2000;
+
+const int Margin = 50;
 
 int posFRLeg = 200;//43
 int posBRLeg = 822;//2
 int posFLLeg = 818;//10
 int posBLLeg = 200;//1
 
-//HX711 scale;
+HX711 scale;
 
 void setup() {
   //Serial.begin(38400);
@@ -90,27 +91,24 @@ void setup() {
   pinMode(inL3, OUTPUT);
   pinMode(inL4, OUTPUT);
   Dynamixel.begin(56700); 
-  //Dynamixel.begin(Baudrate); 
+  
   Dynamixel.setDirectionPin(SERVO_ControlPin);
 
-  Dynamixel.setMode(SERVO_ID10, SERVO, CW_Angle10, CCW_Angle10);    // set mode to SERVO and set angle limits
+  Dynamixel.setMode(SERVO_ID10, SERVO, CW_Angle10 - Margin, CCW_Angle10);    // set mode to SERVO and set angle limits
   Dynamixel.setMode(SERVO_ID1, SERVO, CW_Angle1, CCW_Angle1);
   Dynamixel.setMode(SERVO_ID2, SERVO, CW_Angle2, CCW_Angle2);    // set mode to SERVO and set angle limits
-  Dynamixel.setMode(SERVO_ID43, SERVO, CW_Angle43, CCW_Angle43);
-  //Serial.print("escaped setup");
+  Dynamixel.setMode(SERVO_ID43, SERVO, CW_Angle43, CCW_Angle43 + Margin);
+  
+  //StandPosition();
+  //PolePosition();
+  //ScoopPosition();
   StandPosition();
   ServoPosition();
 }
 
 void loop() { 
   readSerialPort();
-  //StandPosition();
   
-  
-  //delay(500);
-
-  
-  //Serial.print("test");
   if(msg.indexOf("stop") != -1){
     stopMotors();
     //Serial.print("stop");
@@ -128,11 +126,6 @@ void loop() {
   }else if(msg.indexOf("left") != -1){
     left();
     //Serial.print("left");
-  }else if(msg.indexOf("weight") != -1){
-    //getWeight();
-    Serial.print("weight");
-  }else if(msg.indexOf("raiseHand") != -1){
-    raiseHand();
   }
 
   if(msg.indexOf("up") != -1){
@@ -140,6 +133,13 @@ void loop() {
     ServoPosition();
   }else if(msg.indexOf("down") != -1){
     PolePosition();
+    ServoPosition();
+  }else if(msg.indexOf("open") != -1){
+    Dynamixel.servo(SERVO_ID3, CCW_Angle3, 40);
+  }else if(msg.indexOf("close") != -1){
+    Dynamixel.servo(SERVO_ID3, CW_Angle3, 40);
+  }else if(msg.indexOf("scoop") != -1){
+    ScoopPosition();
     ServoPosition();
   }
 
@@ -149,10 +149,10 @@ void loop() {
 //  }else if(msg == "BSW1"){
 //    StandPosition();
 //    Serial.print("stand");
-  }else if(msg == "scoop"){
-    ScoopPosition();
-    Serial.print("scoop");
-  }
+//  }else if(msg == "scoop"){
+//    //ScoopPosition();
+//    Serial.print("scoop");
+//  }
 
   //ServoPosition();
   
@@ -163,9 +163,8 @@ void loop() {
 //  }else if(msg == "stand"){
 //    StandPosition();
 //    Serial.print("stand");
-//  }
-//  else if(msg == "scoop"){
-//    ScoopPosition();
+//  }else if(msg == "scoop"){
+//    //ScoopPosition();
 //    Serial.print("scoop");
 //  }
 }
@@ -175,14 +174,7 @@ void StandPosition()
   posFRLeg = 200;//43
   posBRLeg = 822;//2
   posFLLeg = 818;//10
-  posBLLeg = 200;//1
-//  Dynamixel.servo(SERVO_ID10,818, Velocity);  
-//  delay(DelayVal);
-//  Dynamixel.servo(SERVO_ID1, 200, Velocity);
-//  delay(DelayVal);
-//  Dynamixel.servo(SERVO_ID2, 822, Velocity);
-//  delay(DelayVal);
-//  Dynamixel.servo(SERVO_ID43, 200, Velocity);   
+  posBLLeg = 200;//1   
 }
 
 void PolePosition(){
@@ -192,32 +184,24 @@ void PolePosition(){
   posBLLeg = 461;//1
 }
 
-void raiseHand(){
-  Dynamixel.servo(SERVO_ID43, 519, Velocity); 
-  delay(4000);
-  Dynamixel.servo(SERVO_ID43, 200, Velocity); 
-}
-
 void ScoopPosition(){
   //verander zodat hij kan scoopen
-  posFRLeg = 150;//43
+  posFRLeg = 519 + Margin;//43
   posBRLeg = 822;//2
-  posFLLeg = 507;//10
+  posFLLeg = 507 - Margin;//10
   posBLLeg = 200;//1
 }
 
 
 void ServoPosition()
 {
-  
   Dynamixel.servo(SERVO_ID10, posFLLeg, Velocity);  
   delay(DelayVal);
   Dynamixel.servo(SERVO_ID1, posBLLeg, Velocity);
   delay(DelayVal);
   Dynamixel.servo(SERVO_ID2, posBRLeg, Velocity);
   delay(DelayVal);
-  Dynamixel.servo(SERVO_ID43, posFRLeg, Velocity);  
-  
+  Dynamixel.servo(SERVO_ID43, posFRLeg, Velocity);
 }
 
 void goForward(){
@@ -241,11 +225,29 @@ void right(){
   motorLVfor();
 }
 
+void stepRight(){
+  motorRVrev();
+  motorRArev();
+  motorLAfor();
+  motorLVfor();
+  delay(300);
+  stopMotors();
+}
+
 void left(){
   motorRVfor();
   motorRAfor();
   motorLArev();
   motorLVrev();
+}
+
+void stepLeft(){
+  motorRVfor();
+  motorRAfor();
+  motorLArev();
+  motorLVrev();
+  delay(300);
+  stopMotors();
 }
 
 void stopMotors(){
@@ -255,7 +257,6 @@ void stopMotors(){
   digitalWrite(inR4, LOW);
   digitalWrite(inL1, LOW);
   digitalWrite(inL2, LOW);
-  //weet niet of dit nodig is
   analogWrite(enRV, 0);
   analogWrite(enRA, 0);
   analogWrite(enLA, 0);
@@ -271,23 +272,20 @@ void readSerialPort() {
     }
     Serial.flush();
   }
-//  if (Serial.available() > 0) {
-//    msg = Serial.readStringUntil('\n');
-//  }
 }
 
 void motorRVfor(){
   //turn motor RV forward
-  digitalWrite(inR3, LOW);
-  digitalWrite(inR4, HIGH);
+  digitalWrite(inR3, HIGH);
+  digitalWrite(inR4, LOW);
 
   analogWrite(enRV, mSpeed);
 }
 
 void motorRVrev(){
   //turn motor RV reverse
-  digitalWrite(inR3, HIGH);
-  digitalWrite(inR4, LOW);
+  digitalWrite(inR3, LOW);
+  digitalWrite(inR4, HIGH);
 
   analogWrite(enRV, 200);
 }
@@ -310,34 +308,34 @@ void motorRArev(){
 
 void motorLAfor(){
   //turn motor LA forward
-  digitalWrite(inL1, LOW);
-  digitalWrite(inL2, HIGH);
+  digitalWrite(inL1, HIGH);
+  digitalWrite(inL2, LOW);
 
   analogWrite(enLA, mSpeed);
 }
 
 void motorLArev(){
   //turn motor LA reverse
-  digitalWrite(inL1, HIGH);
-  digitalWrite(inL2, LOW);
+  digitalWrite(inL1, LOW);
+  digitalWrite(inL2, HIGH);
 
-  analogWrite(enLA, 200);
+  analogWrite(enLA, mSpeed);
 }
 
 void motorLVfor(){
   //turn motor LV forward
-  digitalWrite(inL3, LOW);
-  digitalWrite(inL4, HIGH);
+  digitalWrite(inL3, HIGH);
+  digitalWrite(inL4, LOW);
 
   analogWrite(enLV, mSpeed);
 }
 
 void motorLVrev(){
   //turn motor LV reverse
-  digitalWrite(inL3, HIGH);
-  digitalWrite(inL4, LOW);
+  digitalWrite(inL3, LOW);
+  digitalWrite(inL4, HIGH);
 
-  analogWrite(enLV, 200);
+  analogWrite(enLV, mSpeed);
 }
 
 void getSpeed(String msg){
