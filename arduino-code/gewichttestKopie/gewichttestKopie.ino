@@ -28,7 +28,7 @@
 
 //Bek
 #define SERVO_ID3 (3u)
-#define CW_Angle3 120
+#define CW_Angle3 130
 #define CCW_Angle3 508
 
 #define LOADCELL_DOUT_PIN  A4
@@ -55,7 +55,7 @@ const int inL3 = 3;
 const int inL4 = 2;
 
 String msg = "";
-bool openBek = true;
+
 
 int mSpeed = 150; //motorspeed
 const int Velocity = 150; //servo velocity
@@ -99,13 +99,13 @@ void setup() {
   
   //StandPosition();
   //PolePosition();
-  ScoopPosition();
+  StandPosition();
   ServoPosition();
 }
 
 void loop() { 
-  //readSerialPort();
-  ScoopPosition();
+  readSerialPort();
+  
   if(msg.indexOf("stop") != -1){
     stopMotors();
     //Serial.print("stop");
@@ -123,19 +123,20 @@ void loop() {
   }else if(msg.indexOf("left") != -1){
     left();
     //Serial.print("left");
-  }else if(msg.indexOf("weight") != -1){
-    //getWeight();
-    Serial.print("weight");
   }
-//  }else if(msg.indexOf("raiseHand") != -1){
-//    raiseHand();
-//  }
 
   if(msg.indexOf("up") != -1){
     StandPosition();
     ServoPosition();
   }else if(msg.indexOf("down") != -1){
     PolePosition();
+    ServoPosition();
+  }else if(msg.indexOf("open") != -1){
+    Dynamixel.servo(SERVO_ID3, CCW_Angle3, 40);
+  }else if(msg.indexOf("close") != -1){
+    Dynamixel.servo(SERVO_ID3, CW_Angle3, 40);
+  }else if(msg.indexOf("scoop") != -1){
+    ScoopPosition();
     ServoPosition();
   }
 
@@ -250,20 +251,6 @@ void stepLeft(){
   motorLVrev();
   delay(300);
   stopMotors();
-}
-
-void openMouth(){
-  Dynamixel.servo(SERVO_ID3, CCW_Angle3, 40);
-}
-
-void closeMouth(){
-  if (openBek){
-    Dynamixel.servo(SERVO_ID3, CW_Angle3, 40);
-    openBek = false;
-  }else{
-    Dynamixel.servo(SERVO_ID3, CCW_Angle3, 40);
-    openBek = true;
-  }
 }
 
 void stopMotors(){
