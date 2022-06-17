@@ -56,11 +56,9 @@ const int inL4 = 2;
 
 String msg = "";
 
-
-int mSpeed = 150; //motorspeed
+int mSpeed = 130; //motorspeed
 const int Velocity = 150; //servo velocity
 const int DelayVal = 50;
-
 const int Margin = 50;
 
 int posFRLeg = 200;//43
@@ -71,13 +69,8 @@ int posBLLeg = 200;//1
 HX711 scale;
 
 void setup() {
-  //Serial.begin(38400);
   Serial.begin(56700);
-  //Serial.println("HX711 scale demo");
-  //scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
-  //scale.begin(A2, A3);
-  //scale.set_scale(calibration_factor); //This value is obtained by using the SparkFun_HX711_Calibration sketch
-  //scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
+
   pinMode(enRV, OUTPUT);
   pinMode(enRA, OUTPUT);
   pinMode(enLA, OUTPUT);
@@ -99,22 +92,19 @@ void setup() {
   Dynamixel.setMode(SERVO_ID2, SERVO, CW_Angle2, CCW_Angle2);    // set mode to SERVO and set angle limits
   Dynamixel.setMode(SERVO_ID43, SERVO, CW_Angle43, CCW_Angle43 + Margin);
   
-  //StandPosition();
-  //PolePosition();
-  //ScoopPosition();
-  StandPosition();
-  ServoPosition();
+  StandPosition(); //start position is standposition, edits servo variables to be in standposition
+  ServoPosition(); //set the servo position to the current defined variables, call this after setting a new position
 }
 
 void loop() { 
+  //read messages send from the RaspPi
   readSerialPort();
-  
+
+  //check what msg was send and do things accordingly
   if(msg.indexOf("stop") != -1){
     stopMotors();
     //Serial.print("stop");
   }else if(msg.indexOf("forward") != -1){
-    //msg.indexOf("forward") != -1
-    //getSpeed(msg);
     goForward();
     //Serial.print("forward");
   }else if(msg.indexOf("reverse") != -1){
@@ -142,31 +132,6 @@ void loop() {
     ScoopPosition();
     ServoPosition();
   }
-
-//  if (msg == "BSW0"){
-//    PolePosition();
-//    Serial.print("pole");
-//  }else if(msg == "BSW1"){
-//    StandPosition();
-//    Serial.print("stand");
-//  }else if(msg == "scoop"){
-//    //ScoopPosition();
-//    Serial.print("scoop");
-//  }
-
-  //ServoPosition();
-  
-
-//  if (msg == "pole"){
-//    PolePosition();
-//    Serial.print("pole");
-//  }else if(msg == "stand"){
-//    StandPosition();
-//    Serial.print("stand");
-//  }else if(msg == "scoop"){
-//    //ScoopPosition();
-//    Serial.print("scoop");
-//  }
 }
 
 void StandPosition()
@@ -185,7 +150,6 @@ void PolePosition(){
 }
 
 void ScoopPosition(){
-  //verander zodat hij kan scoopen
   posFRLeg = 519 + Margin;//43
   posBRLeg = 822;//2
   posFLLeg = 507 - Margin;//10
@@ -225,14 +189,14 @@ void right(){
   motorLVfor();
 }
 
-void stepRight(){
-  motorRVrev();
-  motorRArev();
-  motorLAfor();
-  motorLVfor();
-  delay(300);
-  stopMotors();
-}
+//void stepRight(){
+//  motorRVrev();
+//  motorRArev();
+//  motorLAfor();
+//  motorLVfor();
+//  delay(300);
+//  stopMotors();
+//}
 
 void left(){
   motorRVfor();
@@ -241,14 +205,14 @@ void left(){
   motorLVrev();
 }
 
-void stepLeft(){
-  motorRVfor();
-  motorRAfor();
-  motorLArev();
-  motorLVrev();
-  delay(300);
-  stopMotors();
-}
+//void stepLeft(){
+//  motorRVfor();
+//  motorRAfor();
+//  motorLArev();
+//  motorLVrev();
+//  delay(300);
+//  stopMotors();
+//}
 
 void stopMotors(){
   digitalWrite(inR1, LOW);
@@ -338,13 +302,6 @@ void motorLVrev(){
   analogWrite(enLV, mSpeed);
 }
 
-void getSpeed(String msg){
-  mSpeed = msg.substring(msg.indexOf(":")+1).toInt();
-}
-
-void getWeight(){
-  Serial.print("Reading: ");
-  Serial.print(scale.get_units(), 4); //scale.get_units() returns a float
-  Serial.print(" kg"); //You can change this to kg but you'll need to refactor the calibration_factor
-  Serial.println();
-}
+//void getSpeed(String msg){
+//  mSpeed = msg.substring(msg.indexOf(":")+1).toInt();
+//}
