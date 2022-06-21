@@ -156,7 +156,6 @@ void ScoopPosition(){
   posBLLeg = 200;//1
 }
 
-
 void ServoPosition()
 {
   Dynamixel.servo(SERVO_ID10, posFLLeg, Velocity);  
@@ -189,30 +188,12 @@ void right(){
   motorLVfor();
 }
 
-//void stepRight(){
-//  motorRVrev();
-//  motorRArev();
-//  motorLAfor();
-//  motorLVfor();
-//  delay(300);
-//  stopMotors();
-//}
-
 void left(){
   motorRVfor();
   motorRAfor();
   motorLArev();
   motorLVrev();
 }
-
-//void stepLeft(){
-//  motorRVfor();
-//  motorRAfor();
-//  motorLArev();
-//  motorLVrev();
-//  delay(300);
-//  stopMotors();
-//}
 
 void stopMotors(){
   digitalWrite(inR1, LOW);
@@ -304,4 +285,22 @@ void motorLVrev(){
 
 //void getSpeed(String msg){
 //  mSpeed = msg.substring(msg.indexOf(":")+1).toInt();
+//}
+
+//void stepRight(){
+//  motorRVrev();
+//  motorRArev();
+//  motorLAfor();
+//  motorLVfor();
+//  delay(300);
+//  stopMotors();
+//}
+
+//void stepLeft(){
+//  motorRVfor();
+//  motorRAfor();
+//  motorLArev();
+//  motorLVrev();
+//  delay(300);
+//  stopMotors();
 //}
